@@ -42,7 +42,7 @@ export const Select = ({ onChange, options = [], value, placeholder }: SelectPro
           ev.stopPropagation();
         }}
         onFocus={() => setVisible(true)}
-        onBlur={() => setVisible(false)}
+        // onBlur={() => setVisible(false)}
         value={value}
       />
       {visible}

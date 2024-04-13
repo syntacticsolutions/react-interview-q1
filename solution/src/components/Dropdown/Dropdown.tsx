@@ -8,9 +8,34 @@ function Dropdown({
   visible = false,
   style = { top: "-20px" },
   onSelected,
-  onClosed
+  onClosed,
 }: DropdownProps) {
   const dropdownRef = useRef(document.createElement("ul"));
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemRefs = useRef(new Array(list.length));
+
+  // Focus the current item when currentIndex changes
+  useEffect(() => {
+    if (itemRefs.current[currentIndex]) {
+      itemRefs.current[currentIndex].focus();
+    }
+  }, [currentIndex]);
+
+  // Handle key down events
+  const handleKeyDown = (event: any, index: number, item: Option) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault(); // Prevent page scrolling
+      const nextIndex = index + 1 < list.length ? index + 1 : 0;
+      setCurrentIndex(nextIndex);
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault(); // Prevent page scrolling
+      const prevIndex = index - 1 >= 0 ? index - 1 : list.length - 1;
+      setCurrentIndex(prevIndex);
+    } else if (event.key === "Enter") {
+      setCurrentIndex(-1);
+      onSelected(item);
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,7 +60,7 @@ function Dropdown({
 
   const handleSelectItem = (item: Option) => () => {
     // Assuming you handle selected item or dispatch event here
-    onSelected(item)
+    onSelected(item);
   };
 
   return (
@@ -47,6 +72,8 @@ function Dropdown({
             role="button"
             onClick={handleSelectItem(item)}
             tabIndex={0}
+            ref={(el) => (itemRefs.current[index] = el)}
+            onKeyDown={(event) => handleKeyDown(event, index, item)}
           >
             <li>{item.label}</li>
           </div>

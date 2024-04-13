@@ -27,13 +27,21 @@ export const DropdownContainer = styled.div`
       display: block;
     }
 
+    div:focus {
+      li {
+        background: linear-gradient(0.25turn, #4169e1, #87ceeb);
+        color: white;
+      }
+    }
+
     li {
       display: flex;
       gap: 15px;
       padding: 8px 16px;
       cursor: pointer;
-      &:hover {
-        background: linear-gradient(0.25turn, #87CEEB, #4169E1);
+      &:hover,
+      &:focus {
+        background: linear-gradient(0.25turn, #4169e1, #87ceeb);
         color: white;
       }
     }
