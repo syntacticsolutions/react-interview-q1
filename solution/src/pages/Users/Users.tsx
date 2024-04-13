@@ -100,7 +100,7 @@ export const Users = () => {
             Add
           </Button>
         </div>
-        {tableData.length && <Table data={tableData} config={usersConfig} />}
+        {!!tableData.length && <Table data={tableData} config={usersConfig} />}
       </FormSection>
     </Main>
   );
@@ -121,9 +121,15 @@ const FormSection = styled.section`
 
   .button-container {
     text-align: right;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 
     button {
-      margin-left: 20px;
+      min-width: 300px;
+      margin-bottom: 20px;
     }
   }
 `;

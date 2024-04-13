@@ -44,7 +44,7 @@ export const Error = styled.p`
 export default function Input(props: any) {
   return (
     <div className="input-container">
-      <StyledInput {...props} />
+      <StyledInput {...props} value={props.value || ''} />
       {props.error && <Error>{props.error}</Error>}
     </div>
   );

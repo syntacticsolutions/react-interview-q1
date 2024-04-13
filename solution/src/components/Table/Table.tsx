@@ -1,4 +1,11 @@
 import React from "react";
+import {
+  StyledCell,
+  StyledHead,
+  StyledHeaderCell,
+  StyledRow,
+  StyledTable,
+} from "./Styles";
 
 type Column = {
   label: string;
@@ -12,23 +19,23 @@ type TableProps<T extends Record<string, any>> = {
 
 export const Table = ({ config, data }: TableProps<any>) => {
   return (
-    <table>
-      <thead>
+    <StyledTable>
+      <StyledHead>
         <tr>
           {config.map((column: Column) => (
-            <th>{column.label}</th>
+            <StyledHeaderCell key={column.key}>{column.label}</StyledHeaderCell>
           ))}
         </tr>
-      </thead>
+      </StyledHead>
       <tbody>
-        {data.map((row) => (
-          <tr>
+        {data.map((row, rowIndex) => (
+          <StyledRow key={rowIndex}>
             {config.map((column: Column) => (
-              <th>{row[column.key]}</th>
+              <StyledCell key={column.key}>{row[column.key]}</StyledCell>
             ))}
-          </tr>
+          </StyledRow>
         ))}
       </tbody>
-    </table>
+    </StyledTable>
   );
 };
