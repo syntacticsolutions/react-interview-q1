@@ -1,4 +1,4 @@
-import { Option } from "../Dropdown/Dropdown";
+import { Option } from "../Dropdown/types";
 import { FormInput } from "./FormInputs/FormInput";
 import { FormSelect } from "./FormInputs/FormSelect";
 
@@ -13,7 +13,7 @@ export const inputMap = {
 };
 
 export interface FormGeneratorProps<T extends Record<string, any>> {
-  inputTypeMap?: Record<InputTypes, React.FC>;
+  inputTypeMap?: Record<InputTypes, React.FC<any>>;
   config: FGConfig<any>[];
   onUpdated?: (formData: T) => void;
   initialState?: T;

@@ -1,7 +1,4 @@
 import React from 'react';
 import { Select } from '../../Select/Select';
 
-export const FormSelect = () => {
-
-    return <Select />
-}
+export const FormSelect = Select
