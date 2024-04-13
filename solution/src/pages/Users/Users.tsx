@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { InputTypes } from "../../components/FormGenerator/types";
 import { FormGenerator } from "../../components/FormGenerator/FormGenerator";
-import { getLocations } from "../../mock-api/apis";
+import { getLocations, isNameValid } from "../../mock-api/apis";
 import { Option } from "../../components/Dropdown/types";
 import _ from "lodash";
 import { styled } from "styled-components";
+import { useFormErrors, validate } from "../../hooks/useFormErrors/useFormErrors";
 
 const config = [
   {
@@ -22,6 +23,18 @@ const config = [
   },
 ];
 
+export const custom = async ({ formData, value, error }: any) => {
+    if (error) return { error };
+    const isValid = await isNameValid(value);
+    if (!isValid) return { error: "this name has already been taken." };
+    return { formData, value };
+  };
+
+
+const testMap = {
+    name: validate(custom),
+  };
+
 export const Users = () => {
   const [formState, setFormState] = useState({});
   const [reactiveConfig, setReactiveConfig] = useState(config);
@@ -37,10 +50,14 @@ export const Users = () => {
     });
   }, []);
 
+  const {errors} = useFormErrors(formState, testMap)
+
   return (
     <Main>
       <FormSection>
-        <FormGenerator config={reactiveConfig} onUpdated={setFormState} />
+        <FormGenerator config={reactiveConfig} onUpdated={setFormState} errors={errors as any} />
+        <div className="button-container">
+        </div>
       </FormSection>
     </Main>
   );
@@ -51,7 +68,7 @@ const FormSection = styled.section`
   width: 100%;
   margin-top: 100px;
 
-  input {
+  .input-container {
     margin-bottom: 20px;
   }
 `;

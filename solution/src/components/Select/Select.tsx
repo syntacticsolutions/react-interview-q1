@@ -38,11 +38,10 @@ export const Select = ({ onChange, options = [], value, placeholder }: SelectPro
         onChange={handleSearchChange}
         onInput={handleSearchChange}
         onKeyUp={handleSearchChange as any}
-        onClick={(ev) => {
+        onClick={(ev: any) => {
           ev.stopPropagation();
         }}
         onFocus={() => setVisible(true)}
-        // onBlur={() => setVisible(false)}
         value={search || value?.label }
       />
       <Dropdown

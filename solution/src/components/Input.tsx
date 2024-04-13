@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export default styled.input`
+const StyledInput = styled.input`
   width: 100%;
   padding: 6px 11px;
   font-size: 14px;
@@ -34,3 +34,18 @@ export default styled.input`
     cursor: not-allowed;
   }
 `;
+
+export const Error = styled.p`
+  color: red;
+  width: 100%;
+  text-align: left;
+`;
+
+export default function Input(props: any) {
+  return (
+    <div className="input-container">
+      <StyledInput {...props} />
+      {props.error && <Error>{props.error}</Error>}
+    </div>
+  );
+}

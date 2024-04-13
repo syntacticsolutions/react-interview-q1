@@ -1,6 +1,6 @@
 import { Option } from "../Dropdown/types";
-import { FormInput } from "./FormInputs/FormInput";
-import { FormSelect } from "./FormInputs/FormSelect";
+import Input from "../Input";
+import { Select } from "../Select/Select";
 
 export enum InputTypes {
   STRING = "STRING",
@@ -8,8 +8,8 @@ export enum InputTypes {
 }
 
 export const inputMap = {
-  [InputTypes.STRING]: FormInput,
-  [InputTypes.SELECT]: FormSelect,
+  [InputTypes.STRING]: Input,
+  [InputTypes.SELECT]: Select,
 };
 
 export interface FormGeneratorProps<T extends Record<string, any>> {
@@ -17,6 +17,7 @@ export interface FormGeneratorProps<T extends Record<string, any>> {
   config: FGConfig<any>[];
   onUpdated?: (formData: T) => void;
   initialState?: T;
+  errors?: Record<string, boolean>
 }
 
 export type FGConfig<T extends BaseConfig> = T extends InputConfig
