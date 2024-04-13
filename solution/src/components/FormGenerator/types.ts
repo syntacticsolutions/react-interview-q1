@@ -16,8 +16,8 @@ export interface FormGeneratorProps<T extends Record<string, any>> {
   inputTypeMap?: Record<InputTypes, React.FC<any>>;
   config: FGConfig<any>[];
   onUpdated?: (formData: T) => void;
-  initialState?: T;
-  errors?: Record<string, boolean>
+  errors?: Record<string, boolean>,
+  formState: T
 }
 
 export type FGConfig<T extends BaseConfig> = T extends InputConfig

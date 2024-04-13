@@ -6,19 +6,14 @@ import _ from 'lodash'
 
 export const FormGenerator = ({
   config,
-  initialState = {},
   inputTypeMap = inputMap,
-  onUpdated,
+  onUpdated = (data: Record<string, any>) => {},
   errors = {},
+  formState
 }: FormGeneratorProps<any>) => {
-  const { state, ...setters } = useFormData(initialState);
-  // const errors = useValidation(state);
+  const { state, ...setters } = useFormData(formState, onUpdated);
 
-  const getComponentSpecificProps = usePropGetter(state, setters);
-
-  useEffect(() => {
-    onUpdated?.(state);
-  }, [state, onUpdated]);
+  const getComponentSpecificProps = usePropGetter(formState, setters);
 
   return (
     <div>
