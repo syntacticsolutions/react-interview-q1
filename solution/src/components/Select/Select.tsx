@@ -6,7 +6,7 @@ import { Option } from "../Dropdown/types";
 interface SelectProps {
   onChange: (value: Option) => void;
   options: Option[];
-  value: string;
+  value: Option;
   placeholder?: string;
 }
 
@@ -43,9 +43,8 @@ export const Select = ({ onChange, options = [], value, placeholder }: SelectPro
         }}
         onFocus={() => setVisible(true)}
         // onBlur={() => setVisible(false)}
-        value={value}
+        value={search || value?.label }
       />
-      {visible}
       <Dropdown
         visible={visible}
         list={filteredOptions}
