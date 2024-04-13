@@ -110,6 +110,7 @@ const FormSection = styled.section`
   max-width: 700px;
   width: 100%;
   margin-top: 100px;
+  padding: 15px;
 
   h1 {
     text-align: left;
